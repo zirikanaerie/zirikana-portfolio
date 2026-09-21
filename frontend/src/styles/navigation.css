@@ -1,0 +1,213 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  background: transparent;
+  transition: background var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+  border-bottom: 1px solid transparent;
+}
+
+/* The frosted bar lives on a pseudo-element, NOT on .nav itself.
+   backdrop-filter on .nav would make it the containing block for the
+   position:fixed mobile panel, collapsing that panel to the header's
+   height (clipped, see-through menu) once the page is scrolled. */
+.nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(12, 12, 12, 0.88);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out);
+  pointer-events: none;
+}
+
+.nav--scrolled {
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.nav--scrolled::before {
+  opacity: 1;
+}
+
+/* Solid bar while the mobile menu is open so nothing shows through it */
+.nav--menu-open::before {
+  opacity: 1;
+  background: var(--bg);
+}
+
+.nav--menu-open {
+  border-bottom-color: var(--line-soft);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.nav__brand {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  flex-shrink: 0;
+}
+
+.nav__links {
+  display: none;
+  align-items: center;
+  gap: var(--space-3);
+  flex: 1;
+  justify-content: center;
+}
+
+.nav__link {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  font-weight: 500;
+  padding: 0.4rem 0.1rem;
+  position: relative;
+  transition: color var(--dur-fast) var(--ease-out);
+  white-space: nowrap;
+}
+
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: var(--gold);
+  transition: width var(--dur-fast) var(--ease-out);
+}
+
+.nav__link:hover,
+.nav__link--active {
+  color: var(--text);
+}
+
+.nav__link--active::after {
+  width: 100%;
+}
+
+.nav__cv-btn {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: #0c0c0c;
+  background: var(--gold);
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+
+.nav__cv-btn:hover {
+  background: var(--gold-bright);
+}
+
+.nav__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--text);
+  padding: 0.4rem;
+}
+
+@media (min-width: 1080px) {
+  .nav__links {
+    display: flex;
+  }
+  .nav__cv-btn {
+    display: inline-flex;
+  }
+  .nav__toggle {
+    display: none;
+  }
+}
+
+/* Mobile menu panel */
+.nav__mobile {
+  position: fixed;
+  top: var(--nav-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--bg);
+  transform: translateX(100%);
+  transition: transform var(--dur-base) var(--ease-out);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-4) var(--container-pad) var(--space-5);
+  overflow-y: auto;
+}
+
+.nav__mobile--open {
+  transform: translateX(0);
+}
+
+@media (min-width: 1080px) {
+  .nav__mobile {
+    display: none;
+  }
+}
+
+.nav__mobile nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav__mobile-link {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--line-soft);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.nav__mobile-number {
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.nav__mobile-link--active {
+  color: var(--gold);
+}
+
+.nav__mobile-cv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: var(--gold);
+  color: #0c0c0c;
+  font-weight: 700;
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  margin-top: var(--space-4);
+}

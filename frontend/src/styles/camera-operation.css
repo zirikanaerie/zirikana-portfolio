@@ -1,0 +1,61 @@
+.camera-operation__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  align-items: center;
+}
+
+.camera-operation__description {
+  color: var(--text-dim);
+  max-width: 46ch;
+  margin-bottom: var(--space-4);
+  line-height: 1.7;
+}
+
+.camera-operation__skills {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.camera-operation__skill {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 600;
+}
+
+.camera-operation__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+.camera-operation__closing {
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.camera-operation__image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border: 1px solid var(--line);
+}
+
+@media (min-width: 900px) {
+  .camera-operation__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-7);
+  }
+  .camera-operation__grid .camera-operation__body {
+    order: 1;
+  }
+  .camera-operation__grid .camera-operation__media {
+    order: 2;
+  }
+}
