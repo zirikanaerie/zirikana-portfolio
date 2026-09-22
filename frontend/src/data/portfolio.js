@@ -213,7 +213,7 @@ export const projects = {
       alt: "Editorial style portrait, seated with tie",
     },
     {
-      title: "Outdoor Portrait",
+      title: "In Portrait",
       category: "Photography",
       src: "/assets/images/project-2.jpg",
       alt: "Outdoor styled portrait with decorative pottery",
